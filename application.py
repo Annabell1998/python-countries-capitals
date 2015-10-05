@@ -2,6 +2,7 @@
 import os
 import sys
 from operator import itemgetter
+#LIST = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","","o","p","q","r","s","t","u","v","w","x","y","z"," "]
 COUNTR_AND_CAP = {}
 def welcome():
 	clear()
@@ -24,26 +25,26 @@ def menu():
 	option(OPTION)
 def option(OPTION):
 	OPTION = OPTION.lower()
-	if OPTION.lower() == "country":
+	if OPTION == "country":
 		clear()
 		print "you Choose:'insert Country'"
 		dictionary()
-	elif OPTION.lower() == "countries":
+	elif OPTION == "countries":
 		clear()
 		print "You Choose:'Countries list'"
 		countries()
-	elif OPTION.lower() == "capitals":
+	elif OPTION == "capitals":
 		clear()
 		print "You Choose:'Capitals List'"
 		capitals()
-	elif OPTION.lower() == "all":
+	elif OPTION == "all":
 		clear()
 		print "You Choose: 'Countries and Capitals list'"
 		All()
-	elif OPTION.lower == "all ordered":
+	elif OPTION == "allordered":
 		print "You Choose: 'Countries and Capitals ordened by Capitals'"
 		order()
-	elif OPTION.lower() == "exit":
+	elif OPTION == "exit":
 		clear()
 		print "See you later, comback soon"
 		exit()
@@ -53,8 +54,19 @@ def option(OPTION):
 		menu()
 def dictionary():
 	COUNTRY = raw_input("Enter the country: ")
-	CAPITALS = raw_input ("Enter the capital: ")
-	COUNTR_AND_CAP[COUNTRY] = CAPITALS
+	if str(COUNTRY).isalpha() == True or " " in COUNTRY:
+		true = True
+		while true == True:
+			CAPITALS = raw_input ("Enter the capital: ")
+			if str(CAPITALS).isalpha() == True or " " in CAPITALS:
+				COUNTR_AND_CAP[COUNTRY] = CAPITALS
+				true = False
+			else: 
+				print "only Words please"
+				true = True
+	else:
+		print "only word please"
+		dictionary()
 	yes = True
 	while yes == True:
 		CHOOSE = raw_input("do you wish to keep entering countries and capitals? Y/N ")
@@ -105,20 +117,21 @@ def All():
 		clear()
 		menu()
 def order():
-	if COUNTR_AND_CAP == {}:
-		print "You don't have Countries or Capitals"
-		dictionary()
-	else:
-		print "the Capital and the Country :"
-		items = COUNTR_AND_CAP.items()
-		items.sort(key = itemgetter(1), reverse=True)
-		for i in items:
-			print i," = ",
-			for i in COUNTR_AND_CAP:
-				print i 
-		raw_input("return to the menu, press enter")
-		clear()
-		menu()
+	print "We are Working... Sorry"
+	#if COUNTR_AND_CAP == {}:
+	#print "You don't have Countries or Capitals"
+	#dictionary()
+	#else:
+	#print "the Capital and the Country :"
+	#items = COUNTR_AND_CAP.items()
+	#items.sort(key = itemgetter(1), reverse=True)
+	#for i in items:
+	#print i," = ",
+	#for i in COUNTR_AND_CAP:
+	#print i 
+	raw_input("return to the menu, press enter")
+	clear()
+	menu()
 
 def clear():
 	os.system("reset")
