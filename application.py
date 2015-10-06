@@ -67,6 +67,7 @@ def option(OPTION):
         menu()
 def dictionary():
     COUNTRY = raw_input("Enter the country: ")
+    COUNTRY = COUNTRY.lower()
     COUNTRY = COUNTRY.title()
     false = True
     while false == True:
@@ -80,6 +81,7 @@ def dictionary():
     OK = True
     while OK == True:
         CAPITALS = raw_input ("Enter the capital: ")
+        CAPITALS = CAPITALS.lower()
         CAPITALS = CAPITALS.title()
         for a in CAPITALS:
             if a.isdigit() == False:
@@ -153,29 +155,29 @@ def order():
         clear()
         menu()
 def mail():
-  fromaddr = raw_input("Enter Your E-mail: ")
-  password = getpass.getpass("Password: ")
-  toaddrs = raw_input("Enter the email address of the recipient: ")
-  body = "Countries\t******************\tCapitals\n"
-  for msg in COUNTR_AND_CAP:
-       body = body + str(msg).center(43) +str(COUNTR_AND_CAP[msg]).center(43) + "\n" 
-  msg = MIMEMultipart()
-  msg['From'] = fromaddr #This saves the mail of the sender
-  msg['To'] = toaddrs  #This saves the mail of the receiver
-  msg['Subject'] = "Countries and Capitals"  #This saves the subject
-  msg.attach(MIMEText(body, 'plain')) #This saves the message
-
-  try:
-      server = smtplib.SMTP("smtp.gmail.com", 587)
-      server.starttls()
-      server.login(fromaddr,password)
-      text = msg.as_string()
-      server.sendmail(fromaddr, toaddrs, text)
-      server.quit()
-      raw_input("<<<<<<<<<Your message was sent>>>>>>>")
-      menu()
-  except ValueError:
-      print "Sorry, We Can't send your mail"
+    fromaddr = raw_input("Enter Your E-mail: ")
+    password = getpass.getpass("Password: ")
+    toaddrs = raw_input("Enter the email address of the recipient: ")
+    body = "Countries\t******************\tCapitals\n"
+    for msg in COUNTR_AND_CAP:
+        body = body + str(msg).center(20) +str(COUNTR_AND_CAP[msg]).center(43) + "\n" 
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddrs
+    msg['Subject'] = "Countries and Capitals"
+    msg.attach(MIMEText(body, 'plain'))
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(fromaddr,password)
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddrs, text)
+        server.quit()
+        raw_input("<<<<<<<<<Your message was sent>>>>>>>")
+        menu()
+    except (smtplib.SMTPAuthenticationError):
+        raw_input("Your password or email not accepted")
+        mail()
 
 def clear():
     os.system("reset")
