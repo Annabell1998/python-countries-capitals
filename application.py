@@ -67,8 +67,7 @@ def option(OPTION):
         menu()
 def dictionary():
     COUNTRY = raw_input("Enter the country: ")
-    COUNTRY = COUNTRY.lower()
-    COUNTRY = COUNTRY.title()
+    COUNTRY = COUNTRY.capitalize()
     false = True
     while false == True:
         for i in COUNTRY:
@@ -81,8 +80,7 @@ def dictionary():
     OK = True
     while OK == True:
         CAPITALS = raw_input ("Enter the capital: ")
-        CAPITALS = CAPITALS.lower()
-        CAPITALS = CAPITALS.title()
+        CAPITALS = CAPITALS.capitalize()
         for a in CAPITALS:
             if a.isdigit() == False:
                 COUNTR_AND_CAP[COUNTRY] = CAPITALS
